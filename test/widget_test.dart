@@ -1,30 +1,24 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_http_app/main.dart';
+import 'package:flutter_http_app/model/user.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  // 1. User 객체 만들기
+  User u1 =
+      User(id: 1, username: "ssar", password: "1234", email: "ssar@nate.com");
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  // 2. User 맵타입 만들기
+  Map<String, dynamic> u2 = {
+    "id": 2,
+    "username": "cos",
+    "password": "1234",
+    "email": "cos@nate.com"
+  };
+  print(u2["username"]);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  // 3. map -> Object 변환 (수신)
+  User u3 = User.fromJson(u2);
+  print(u3.username);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  // 4. dart.object -> map (발신) : 왜 Json 으로 안바꿀까 ? 알아서 map 을 json으로 바꾸니까 누가 ? 메세지 컨버터가
+  Map<String, dynamic> u4 = u3.toJson();
+  print(u4["username"]);
 }
