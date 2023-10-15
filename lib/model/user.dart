@@ -12,6 +12,7 @@ class User {
 
   User.fromJson(Map<String, dynamic> json) {
     // 이 코드가 디비(스프링) 쪽에서 제이슨 타입(스트링)을 받아서 맵타입으로 파싱하는거야 !
+    // 생성자를 통해서 바인딩까지 하는구나!
     id = json["id"];
     username = json["username"];
     password = json["password"];
